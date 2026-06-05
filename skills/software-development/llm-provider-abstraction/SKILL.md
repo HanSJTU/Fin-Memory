@@ -105,6 +105,152 @@ def call_llm(system, messages, *, model=None, max_tokens=2048,
 
 ## Pitfalls
 
+### `exec()` sandbox pitfalls (latent bugs exposed by provider switch)
+
+When a project uses `exec()` with a constrained namespace to run LLM-generated
+code (common in AI research/backtesting frameworks), switching providers can
+expose pre-existing sandbox bugs that never triggered with the old provider's
+code style.
+
+**Checklist for `exec()` sandbox components when switching providers:**
+
+1. **Import whitelist validation**: If the sandbox validates imports via AST
+   before `exec()`, check whether the validator examines the *full dotted path*
+   or only the *top-level module name*. A common bug:
+
+   ```python
+   # BUG: only checks the top-level name
+   if name.name.split(".")[0] not in _ALLOWED_IMPORTS:
+       raise SandboxError(f"Disallowed import: {name.name}")
+   ```
+
+   This rejects `import ai_quant_lab.features.library` because
+   `"ai_quant_lab"` is checked against the whitelist, but only the full
+   dotted path `"ai_quant_lab.features.library"` is in it. The fix: add the
+   top-level name to the whitelist (`"ai_quant_lab"`), or change the validator
+   to check the full path.
+
+2. **`__import__` missing from safe builtins**: If the sandbox supplies a
+   restricted `__builtins__` dict to `exec()`, it MUST include `__import__`.
+   Without it, every `import` statement fails at runtime even though the AST
+   validation passed. Fix: add `"__import__"` to the safe builtins list. It's
+   safe because the AST validation already runs before `exec()` and blocks
+   disallowed imports.
+
+3. **Namespace isolation**: The `exec()` namespace should contain pre-loaded
+   references to whitelisted modules (e.g. `{"np": np, "pd": pd}`) so the
+   strategy code doesn't need to import them. This reduces import friction
+   and catches missing references at compile time rather than runtime.
+
+4. **Strategy function signature**: The generated code must define a function
+   with the exact signature the sandbox expects. If the CodeAgent generates
+   different code shapes across providers, add a wrapper or template in the
+   code-generation prompt that enforces the correct signature.
+
+**Root cause pattern:** The old provider (Claude) generated code that never
+exercised certain code paths in the validation layer. When switching to a
+new provider (DeepSeek, GPT, etc.), the new code style triggers latent bugs.
+This is not a regression — it's a bug that was always there, now visible.
+Always run a small test batch (5-10 iterations) after a provider switch to
+surface these issues before committing to a full run.
+
+### Provider-specific prompt calibration
+
+**Critical lesson: the same system prompt produces radically different behavior
+across providers.**
+
+When you swap from Claude to DeepSeek (or vice versa), all agent system prompts
+need review — especially ones with strict instructions or hard guardrails.
+
+Example from a real migration (Claude → DeepSeek):
+
+| Model | Prompt instruction | Result |
+|-------|-------------------|--------|
+| Claude Sonnet 4 | `"when in doubt, kill"` | Kills ~70% of bad ideas, lets reasonable ones through |
+| DeepSeek-chat (same prompt, temperature=0.3) | `"when in doubt, kill"` | Kills **100%** of ideas — literally executes the instruction |
+
+DeepSeek at low temperature strictly follows literal instructions. Claude
+naturally applies judgment and nuance even to hard directives. This isn't a
+bug in either model — it's a **prompt calibration requirement** when switching.
+
+**Checklist when switching providers:**
+
+1. **Review every agent system prompt** — especially critics, validators,
+   and gate-keepers with "kill", "reject", "flag" instructions. Assume the
+   new model takes them more literally.
+2. **Calibrate strict instructions** — replace unconditional directives
+   (`"when in doubt, kill"`) with nuanced versions
+   (`"when in doubt, PASS — let the backtest decide. Minor concerns are NOT
+   a reason to kill. Only kill for clear, fatal flaws."`)
+3. **Test with a small sample first** — run 5-10 iterations and check
+   behavior before a full run. A 100% kill rate (or 100% accept rate) is
+   a red flag.
+4. **Check temperature** — lower temperature = more literal execution.
+   The new model at the old temperature may differ significantly.
+5. **Run end-to-end, not just the LLM call** — provider differences in code
+   generation can expose latent bugs in downstream validation components
+   (sandbox import checkers, AST validators, etc.) that never triggered
+   with the old provider's output style.
+
+   **Real example:** After switching to DeepSeek, CodeAgent generated
+   `import ai_quant_lab.features.library` which triggered a sandbox
+   import rejection. Investigation revealed a pre-existing sandbox bug:
+   the import whitelist validator checks `import_name.split('.')[0]`
+   (top-level module name), but the whitelist contained full dotted paths
+   like `"ai_quant_lab.features.library"`. The validation failed because
+   `"ai_quant_lab"` wasn't in the whitelist, even though the fully
+   qualified module was. This bug was invisible with Claude because
+   Claude's generated code never used that import path.
+
+**Model-family adjustment heuristics:**
+- **Claude** → add more guardrails and constraints to prompts (Claude is
+  naturally compliant; it benefits from explicit boundary instructions)
+- **DeepSeek / GPT / Mistral** → relax strict language, add nuance
+  (these models execute literal instructions more aggressively)
+- **Reasoning models (o-series, R1, V4-Flash)** → avoid for structured
+  JSON generation; use chat/instruction-tuned variants instead
+
+### Reasoning vs chat models (OpenAI-compatible)
+
+Some providers expose **reasoning models** alongside chat models (e.g. DeepSeek
+V4 Flash, OpenAI o-series). Reasoning models consume output tokens for internal
+"thinking" before producing visible content. This causes two failure modes:
+
+1. **Empty content with `finish_reason: length`** — if `max_tokens` is too
+   small, all tokens are consumed by reasoning and `choice.message.content`
+   comes back as an empty string (`""`). Fix: use a non-reasoning model like
+   `deepseek-chat` instead of `deepseek-v4-flash`, or set `max_tokens` high
+   enough to leave room after reasoning (≥4096).
+2. **Erratic JSON output** — reasoning models may embed JSON inside
+   reasoning traces or return partial JSON when thinking is interrupted.
+   `extract_first_json()` may fail even though the response starts with `{`.
+
+**Recommendation**: for structured JSON generation (hypothesis proposals,
+critiques, code generation), prefer the provider's chat/instruction-tuned
+model variant over its reasoning variant.
+
+### Env var `setdefault` vs direct assignment
+
+When configuring the provider via environment variables, `os.environ.setdefault()`
+silently does nothing if the variable is already set — even to an empty string
+or a stale value inherited from the parent process (e.g. the Hermes agent
+itself). This is insidious because it looks correct on first read.
+
+**Wrong** (silently skips if already present):
+```python
+os.environ.setdefault("LLM_API_KEY", key_from_file)  # BUG: no-op if already set
+```
+
+**Right** (force overrides any inherited value):
+```python
+os.environ["LLM_API_KEY"] = key_from_file  # always takes effect
+```
+
+When writing a runner script that loads credentials from a `.env` or config
+file, always use direct assignment (`os.environ["KEY"] = val`) — never
+`setdefault`. The parent process may have exported a placeholder value that
+you need to replace.
+
 - **Function signature clash**: Anthropic has `system` as a separate parameter;
   OpenAI puts it in the `messages` array. The adapter must handle this.
 - **Prompt caching is Anthropic-only**: The OpenAI-compatible API has no
@@ -138,3 +284,12 @@ def call_llm(system, messages, *, model=None, max_tokens=2048,
 
 - `references/ai-quant-lab-conversion.md` — full diff and rationale for
   converting the ai-quant-lab project from Anthropic-only to multi-provider
+- `references/token-tracked-loop.md` — how to run a token-tracked research
+  loop with progress reporting, including env var pitfalls and reasoning
+  model workarounds
+- `references/detached-daemon-loop.md` — how to run a 50-100 iteration
+  research loop as a fully detached daemon using `os.fork()` + `os.setsid()`
+  pattern, with structured JSON progress file for real-time polling.
+  Use when background processes keep getting killed by SIGTERM or
+  `tcsetattr` errors, or when you need live iteration-by-iteration
+  progress during long runs.

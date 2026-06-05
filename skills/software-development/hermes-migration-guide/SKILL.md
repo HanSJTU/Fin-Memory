@@ -113,3 +113,7 @@ python -m ai_quant_lab.run --iterations 5 --target 1
 - Fin-Memory 每天 5:00 UTC+8 自动同步，迁移前建议先手动运行一次备份脚本确保数据最新
 - 市场数据文件（`market_data/`）已经包含在 Quant-Researcher 仓库中
 - 项目使用 `feat/llm-provider` 分支，支持 DeepSeek / Claude 切换
+
+## Reference files
+
+- `references/fin-memory-setup.md` — detailed backup script, cron job setup, and verification steps
