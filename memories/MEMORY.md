@@ -1,0 +1,3 @@
+Quant repos cloned at /home/ubuntu/projects/. ai-quant-researcher = strategy researcher, QuantDinger = trading platform.
+§
+ai-quant-researcher project at /home/ubuntu/projects/ai-quant-researcher — Claude-driven quant strategy research engine. Uses 5 agents (hypothesis/critic/code/risk/memory) + 3 validation gates (Critic/Deflated Sharpe/Correlation). Supports --market-type crypto for Binance BTC research. A dedicated subagent guide and BTC data download script were generated: binance_btc_strategy_guide.md and download_btc_data.py. 111 tests pass. Can be run via `pip install -e .` and `python -m ai_quant_lab.run --csv ... --market-type crypto --annualization 365 --cost-bps 10`.
