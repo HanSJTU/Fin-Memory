@@ -315,6 +315,20 @@ If you catch yourself thinking:
 | **3. Hypothesis** | Form theory, test minimally, one variable at a time | Confirmed or new hypothesis |
 | **4. Implementation** | Create regression test, fix root cause, verify | Bug resolved, all tests pass |
 
+## Language-Specific Debugging Tools
+
+Use the language-appropriate debugging tool when `print()` / `console.log` isn't enough and you need breakpoints, call stack inspection, or scope exploration:
+
+- **Python debugging** → see `references/python-debugger.md` (pdb + debugpy + remote-pdb)
+- **Node.js debugging** → see `references/node-debugging.md` (node inspect + CDP + heap snapshots)
+
+**When to use these tools vs this skill:**
+- This skill (`systematic-debugging`) is the **methodology** — the 4-phase process for root-cause analysis
+- The language-specific references are the **tools** — how to set breakpoints, inspect state, and trace execution in your specific runtime
+- Use the methodology first to identify what to investigate, then the tools to execute the investigation
+
+---
+
 ## Hermes Agent Integration
 
 ### Investigation Tools

@@ -1,9 +1,9 @@
 {
-  "last_report_path": null,
-  "last_run_at": "2026-06-04T10:51:32.003998+00:00",
-  "last_run_duration_seconds": null,
-  "last_run_summary": "deferred first run — curator seeded, will run after one interval; use `hermes curator run --dry-run` to preview now",
+  "last_report_path": "/home/ubuntu/.hermes/logs/curator/20260611-112219",
+  "last_run_at": "2026-06-11T11:22:19.877184+00:00",
+  "last_run_duration_seconds": 224.562552,
+  "last_run_summary": "auto: no changes; llm: Both references are verified and accessible. The consolidation is complete. Here is the final report:\n\n---\n\n## Human Summary\n\n**Clusters identified and processed:**\n\n### 1. Consolidation: Debugging tools → `systematic-debugging`\n**Merged** …\narchived 7 skill(s):\n  • node-inspect-debugger → systematic-debugging\n  • python-debugpy → systematic-debugging\n  • apple-notes — pruned (stale)\n  • apple-reminders — pruned (stale)\n  • findmy — pruned (stale)\n  • imessage — pruned (stale)\n  • macos-computer-use — pruned (stale)\nfull report: hermes curator status\nkeep an umbrella stable: hermes curator pin systematic-debugging",
   "last_run_summary_shown_at": "2026-06-04T10:51:32.003998+00:00",
   "paused": false,
-  "run_count": 0
+  "run_count": 1
 }
