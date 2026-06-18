@@ -806,6 +806,17 @@ and logs — avoids shell-escaping backslashes in bash.
 
 ---
 
+## Reference Files
+
+The following reference files live under this skill directory and cover specialized Hermes Agent topics:
+
+- `references/migration-guide.md` — migrating Hermes to a new machine: restoring memory, skills, config, and associated repos
+- `references/debugging-tui-commands.md` — debugging slash commands across the Python backend, gateway bridge, and Ink/TypeScript TUI frontend
+- `references/s6-container-supervision.md` — modifying and debugging the s6-overlay supervision tree inside the Hermes Docker image
+- `references/skill-authoring.md` — creating and editing SKILL.md files inside the hermes-agent repo tree (in-repo skills)
+- `references/webhooks.md` — webhook subscription setup, route config, payload templating
+- `references/native-mcp.md` — built-in MCP client integration
+
 ## Troubleshooting
 
 ### Voice not working

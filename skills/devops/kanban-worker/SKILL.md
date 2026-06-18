@@ -181,6 +181,10 @@ You can configure the gateway to receive cross-profile Kanban task notifications
 
 **Don't rely on the CLI when the guidance is available.** The `kanban_*` tools work across all terminal backends (Docker, Modal, SSH). `hermes kanban <verb>` from your terminal tool will fail in containerized backends because the CLI isn't installed there. When in doubt, use the tool.
 
+## Codex Lane Integration
+
+When a coding task is appropriate for Codex CLI, see `references/codex-lane.md` for the full Hermes+Codex dual-lane workflow: worktree isolation, mode selection, reconciliation checklist, and prompt template at `templates/pmb-codex-lane-prompt.md`.
+
 ## CLI fallback (for scripting)
 
 Every tool has a CLI equivalent for human operators and scripts:
