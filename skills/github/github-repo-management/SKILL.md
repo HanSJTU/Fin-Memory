@@ -501,6 +501,17 @@ for g in json.load(sys.stdin):
     print(f\"  {g['id']}  {g['description'] or '(no desc)':40}  {files}\")"
 ```
 
+## 11. Codebase Metrics (pygount)
+
+Get a language breakdown of any repo — file counts, code lines, comment ratios:
+
+```bash
+pip install --break-system-packages pygount 2>/dev/null || pip install pygount
+pygount --format=summary --folders-to-skip=".git,node_modules,venv" .
+```
+
+See `references/codebase-metrics.md` for the full usage guide, including filtering by language, JSON output, per-file inspection, and interpretation of pseudo-languages (`__empty__`, `__binary__`, etc.).
+
 ## Quick Reference Table
 
 | Action | gh | git + curl |
