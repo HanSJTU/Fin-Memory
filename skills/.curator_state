@@ -1,9 +1,9 @@
 {
-  "last_report_path": "/home/ubuntu/.hermes/logs/curator/20260625-120229",
-  "last_run_at": "2026-06-25T12:02:29.446717+00:00",
-  "last_run_duration_seconds": 289.770897,
-  "last_run_summary": "auto: no changes; llm: The consolidation is complete. Let me now write the final summary.\n\n---\n\n## Consolidation Report\n\nAfter reviewing all 78 skills in the skill library, I identified **one clear consolidation opportunity** and executed it.\n\n### Cluster analyze…\narchived 1 skill(s):\n  • codebase-inspection → github-repo-management\nfull report: hermes curator status\nkeep an umbrella stable: hermes curator pin github-repo-management",
+  "last_report_path": "/home/ubuntu/.hermes/logs/curator/20260702-124026",
+  "last_run_at": "2026-07-02T12:40:26.828676+00:00",
+  "last_run_duration_seconds": 778.834237,
+  "last_run_summary": "auto: no changes; llm: ## Summary\n\nThis consolidation pass processed **9 clusters** across **66 candidate skills**, creating **9 umbrella skills** that absorbed **24 narrow siblings** into class-level knowledge packages. Skills that didn't exist on disk (audiocra…\narchived 29 skill(s):\n  • arxiv — pruned (stale)\n  • ascii-art — pruned (stale)\n  • ascii-video — pruned (stale)\n  • claude-code — pruned (stale)\n  • claude-design — pruned (stale)\n  • codex — pruned (stale)\n  • gif-search — pruned (stale)\n  • github-auth — pruned (stale)\n  • github-code-review — pruned (stale)\n  • github-issues — pruned (stale)\n  … and 19 more\nfull report: hermes curator status",
   "last_run_summary_shown_at": "2026-06-04T10:51:32.003998+00:00",
   "paused": false,
-  "run_count": 3
+  "run_count": 4
 }
