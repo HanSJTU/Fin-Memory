@@ -414,9 +414,13 @@ For best results:
 - Set Obsidian's attachment folder to `raw/assets/`
 - Enable "Wikilinks" in Obsidian settings (usually on by default)
 - Install Dataview plugin for queries like `TABLE tags FROM "entities" WHERE contains(tags, "company")`
+- Set `OBSIDIAN_VAULT_PATH` and `WIKI_PATH` to the same directory
 
-If using the Obsidian skill alongside this one, set `OBSIDIAN_VAULT_PATH` to the
-same directory as the wiki path.
+For vault file operations (reading, writing, searching, appending notes), see
+`references/obsidian-vault.md`. This covers:
+- Vault path resolution from `OBSIDIAN_VAULT_PATH` env var
+- Using `read_file` / `write_file` / `patch` / `search_files` with the vault
+- `[[wikilinks]]` syntax conventions
 
 ### Obsidian Headless (servers and headless machines)
 
