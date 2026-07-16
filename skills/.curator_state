@@ -1,9 +1,9 @@
 {
-  "last_report_path": "/home/ubuntu/.hermes/logs/curator/20260709-131821",
-  "last_run_at": "2026-07-09T13:18:21.795845+00:00",
-  "last_run_duration_seconds": 580.983601,
-  "last_run_summary": "auto: no changes; llm: ## Curator Summary\n\nProcessed all 37 agent-created skills. Identified and executed two consolidation clusters and one absorption, plus five PRUNE-BUILTINS archivals of stale bundled skills. **10 skills archived total.**\n\n### Cluster 1: Docu…\narchived 10 skill(s):\n  • obsidian → llm-wiki\n  • teams-meeting-pipeline → hermes-agent\n  • audiocraft-audio-generation — pruned (stale)\n  • evaluating-llms-harness — pruned (stale)\n  • google-workspace — pruned (stale)\n  • nano-pdf — pruned (stale)\n  • ocr-and-documents — pruned (stale)\n  • powerpoint — pruned (stale)\n  • segment-anything-model — pruned (stale)\n  • serving-llms-vllm — pruned (stale)\nfull report: hermes curator status\nkeep an umbrella stable: hermes curator pin hermes-agent",
+  "last_report_path": "/home/ubuntu/.hermes/logs/curator/20260716-135558",
+  "last_run_at": "2026-07-16T13:55:58.466912+00:00",
+  "last_run_duration_seconds": 273.662068,
+  "last_run_summary": "auto: 6 marked stale; llm: ## Curation Pass Complete\n\n### What was done\n\n**Consolidation: `godmode` + `obliteratus` → new `red-teaming` umbrella**\n\nThese two skills tackled the same class problem — \"how to get uncensored output from an LLM\" — through complementary ap…\narchived 7 skill(s):\n  • airtable — pruned (stale)\n  • godmode — pruned (stale)\n  • notion — pruned (stale)\n  • obliteratus — pruned (stale)\n  • openhue — pruned (stale)\n  • touchdesigner-mcp — pruned (stale)\n  • yuanbao — pruned (stale)\nfull report: hermes curator status",
   "last_run_summary_shown_at": "2026-06-04T10:51:32.003998+00:00",
   "paused": false,
-  "run_count": 5
+  "run_count": 6
 }
