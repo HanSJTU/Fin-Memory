@@ -1,9 +1,9 @@
 {
-  "last_report_path": "/home/ubuntu/.hermes/logs/curator/20260716-135558",
-  "last_run_at": "2026-07-16T13:55:58.466912+00:00",
-  "last_run_duration_seconds": 273.662068,
-  "last_run_summary": "auto: 6 marked stale; llm: ## Curation Pass Complete\n\n### What was done\n\n**Consolidation: `godmode` + `obliteratus` → new `red-teaming` umbrella**\n\nThese two skills tackled the same class problem — \"how to get uncensored output from an LLM\" — through complementary ap…\narchived 7 skill(s):\n  • airtable — pruned (stale)\n  • godmode — pruned (stale)\n  • notion — pruned (stale)\n  • obliteratus — pruned (stale)\n  • openhue — pruned (stale)\n  • touchdesigner-mcp — pruned (stale)\n  • yuanbao — pruned (stale)\nfull report: hermes curator status",
+  "last_report_path": "/home/ubuntu/.hermes/logs/curator/20260723-143337",
+  "last_run_at": "2026-07-23T14:33:37.784307+00:00",
+  "last_run_duration_seconds": 323.594449,
+  "last_run_summary": "auto: 1 reactivated; llm: ---\n\n## Curator Consolidation Summary\n\n### Cluster Processed: **Diagrams**\n\n**Skills consolidated:** `architecture-diagram` + `excalidraw` → `diagrams`\n\n**Rationale:** Both skills serve the same user goal: \"create a visual diagram of a syst…\narchived 2 skill(s):\n  • architecture-diagram — pruned (stale)\n  • excalidraw — pruned (stale)\nfull report: hermes curator status",
   "last_run_summary_shown_at": "2026-06-04T10:51:32.003998+00:00",
   "paused": false,
-  "run_count": 6
+  "run_count": 7
 }
