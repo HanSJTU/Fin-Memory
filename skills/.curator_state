@@ -1,9 +1,9 @@
 {
-  "last_report_path": "/home/ubuntu/.hermes/logs/curator/20260723-143337",
-  "last_run_at": "2026-07-23T14:33:37.784307+00:00",
-  "last_run_duration_seconds": 323.594449,
-  "last_run_summary": "auto: 1 reactivated; llm: ---\n\n## Curator Consolidation Summary\n\n### Cluster Processed: **Diagrams**\n\n**Skills consolidated:** `architecture-diagram` + `excalidraw` → `diagrams`\n\n**Rationale:** Both skills serve the same user goal: \"create a visual diagram of a syst…\narchived 2 skill(s):\n  • architecture-diagram — pruned (stale)\n  • excalidraw — pruned (stale)\nfull report: hermes curator status",
+  "last_report_path": "/home/ubuntu/.hermes/logs/curator/20260730-151108",
+  "last_run_at": "2026-07-30T15:11:08.448706+00:00",
+  "last_run_duration_seconds": 141.544908,
+  "last_run_summary": "auto: no changes; llm: All 18 skills confirmed intact. Here is the structured summary.\n\n## Structured summary (required)\n\n```yaml\nconsolidations: []\nprunings: []\n```\n\n### Detailed rationale\n\n| Cluster considered | Members | Verdict | Why |\n|---|---|---|---|\n| Cre…",
   "last_run_summary_shown_at": "2026-06-04T10:51:32.003998+00:00",
   "paused": false,
-  "run_count": 7
+  "run_count": 8
 }
