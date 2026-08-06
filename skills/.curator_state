@@ -1,9 +1,9 @@
 {
-  "last_report_path": "/home/ubuntu/.hermes/logs/curator/20260730-151108",
-  "last_run_at": "2026-07-30T15:11:08.448706+00:00",
-  "last_run_duration_seconds": 141.544908,
-  "last_run_summary": "auto: no changes; llm: All 18 skills confirmed intact. Here is the structured summary.\n\n## Structured summary (required)\n\n```yaml\nconsolidations: []\nprunings: []\n```\n\n### Detailed rationale\n\n| Cluster considered | Members | Verdict | Why |\n|---|---|---|---|\n| Cre…",
+  "last_report_path": "/home/ubuntu/.hermes/logs/curator/20260806-154849",
+  "last_run_at": "2026-08-06T15:48:49.813046+00:00",
+  "last_run_duration_seconds": 177.092683,
+  "last_run_summary": "auto: no changes; llm: I've completed a full content-level scan of all 18 candidates (viewed every SKILL.md in full, including linked-file inventories). Here is my report.\n\n## Curator pass report\n\n### What the candidate set actually looks like\n\nThe task brief ant…",
   "last_run_summary_shown_at": "2026-06-04T10:51:32.003998+00:00",
   "paused": false,
-  "run_count": 8
+  "run_count": 9
 }
