@@ -1,9 +1,9 @@
 {
-  "last_report_path": "/home/ubuntu/.hermes/logs/curator/20260806-154849",
-  "last_run_at": "2026-08-06T15:48:49.813046+00:00",
-  "last_run_duration_seconds": 177.092683,
-  "last_run_summary": "auto: no changes; llm: I've completed a full content-level scan of all 18 candidates (viewed every SKILL.md in full, including linked-file inventories). Here is my report.\n\n## Curator pass report\n\n### What the candidate set actually looks like\n\nThe task brief ant…",
+  "last_report_path": "/home/ubuntu/.hermes/logs/curator/20260813-162751",
+  "last_run_at": "2026-08-13T16:27:51.487645+00:00",
+  "last_run_duration_seconds": 45.08151,
+  "last_run_summary": "auto: no changes; llm: no change",
   "last_run_summary_shown_at": "2026-06-04T10:51:32.003998+00:00",
   "paused": false,
-  "run_count": 9
+  "run_count": 10
 }
