@@ -20,15 +20,15 @@
       "schedule_display": "0 5 * * *",
       "repeat": {
         "times": null,
-        "completed": 48
+        "completed": 83
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-06-05T14:56:37.168707+08:00",
-      "next_run_at": "2026-07-24T05:00:00+08:00",
-      "last_run_at": "2026-07-23T05:01:56.040063+08:00",
+      "next_run_at": "2026-08-28T05:00:00+08:00",
+      "last_run_at": "2026-08-27T05:01:38.839600+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": "delivery error: Weixin send failed: iLink sendmessage rate limited: ret=-2 errcode=None errmsg=prepare failed",
@@ -44,5 +44,5 @@
       "profile": null
     }
   ],
-  "updated_at": "2026-07-23T05:01:56.050903+08:00"
+  "updated_at": "2026-08-27T05:01:38.865690+08:00"
 }
