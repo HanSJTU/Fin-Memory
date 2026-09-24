@@ -1,9 +1,9 @@
 {
-  "last_report_path": "/home/ubuntu/.hermes/logs/curator/20260917-193644",
-  "last_run_at": "2026-09-17T19:36:44.088381+00:00",
-  "last_run_duration_seconds": 43.033597,
+  "last_report_path": "/home/ubuntu/.hermes/logs/curator/20260924-201422",
+  "last_run_at": "2026-09-24T20:14:22.774271+00:00",
+  "last_run_duration_seconds": 43.121513,
   "last_run_summary": "auto: no changes; llm: no change",
   "last_run_summary_shown_at": "2026-06-04T10:51:32.003998+00:00",
   "paused": false,
-  "run_count": 15
+  "run_count": 16
 }
